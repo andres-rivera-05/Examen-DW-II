@@ -1,4 +1,90 @@
 body {
-    background-color: #181818;
+    background-color: #05090a;
     color: white;
+}
+
+th {
+    background-color: #020202 !important;
+    color: rgb(255, 255, 255) !important;
+}
+
+td {
+    background-color: #182426 !important;
+    color: rgb(255, 255, 255) !important;
+    padding: 0 5px !important;
+    line-height: 2;
+}
+
+.text-center.text-white {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold !important;
+}
+
+dl,
+ol,
+ul {
+    color: white;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+button.btn.btn-danger {
+    scale: 0.7;
+}
+
+button.btn.btn-success {
+    scale: 0.7;
+}
+
+.modal-content {
+    background-color: #222427 !important;
+}
+
+.form-control {
+    color: #ffffff !important;
+    background-color: #2e3135 !important;
+    border-color: #4b4c4d !important;
+}
+
+.form-control::placeholder {
+    color: #4f5459 !important;
+}
+
+.input-group-text {
+    color: white !important;
+    border-color: #4b4c4d !important;
+    background-color: #2e3135 !important;
+}
+
+.alertaInfo.mx-auto {
+    color: white;
+    font-weight: bold;
+}
+
+.modal-header {
+    color: white;
+}
+
+.modal-footer {
+    border-color: #4b4c4d;
+}
+
+button.btn-close {
+    filter: invert(1);
+}
+
+button.btn.btn-success.btn-add {
+    height: 31px;
+    width: 31px;
+    padding: 0;
+    scale: 0.8;
+}
+
+.border-secondary {
+    --bs-border-opacity: 1;
+    border-color: rgb(34 51 54) !important;
+}
+
+.navbar.navbar-expand-lg.bg-dark {
+    background-color: #020202 !important;
 }

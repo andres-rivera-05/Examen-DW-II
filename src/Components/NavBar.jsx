@@ -33,7 +33,7 @@ export const NavBar = ({ onBusquedaClick, onFiltroChange, openModal }) => {
                 <Link to={'/'} className="nav-link active" aria-current="page" href="#">Libros <button className='btn btn-success btn-add' data-bs-toggle="modal" data-bs-target="#openModal" onClick={() => handlerOpenModal(1)}><i className='fa-solid fa-circle-plus'></i></button></Link>
               </div>
 
-              <div className="btn-group dropup">
+              <div className="btn-group">
                 <Link to={'/categorias'} className="nav-link active" aria-current="page" href="#">Categorias</Link>
                 <li className="btn  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                   <span className="visually-hidden">Toggle Dropdown</span>
