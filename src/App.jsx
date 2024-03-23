@@ -5,6 +5,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import { Home } from './Components/Home'
 import { NavBar } from './Components/NavBar'
 import { Usuarios } from './Components/Usuarios'
+import { Registro } from './Components/Registro';
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
       <Route path='/' element={<Home/>}/>
       <Route path='/navbar' element={<NavBar />} />
       <Route path='/usuarios' element={<Usuarios />} />
+      <Route path='/registro' element={<Registro />} />
     </Routes>
     </BrowserRouter>
     </>
