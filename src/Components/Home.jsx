@@ -204,7 +204,8 @@ export const Home = () => {
                 <option selected>Categoria</option>
                 <option value="1">Ficcion</option>
                 <option value="2">Novelas</option>
-                <option value="3">Terror</option>
+                <option value="3">Historia</option>
+                <option value="4">Ciencia</option>
               </select>
             </div>
             <div className="modal-footer">

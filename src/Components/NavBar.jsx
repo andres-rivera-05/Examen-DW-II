@@ -34,10 +34,10 @@ export const NavBar = ({ openModal, categoriaOp }) => {
                   <span className="visually-hidden">Toggle Dropdown</span>
                 </li>
                 <ul className="dropdown-menu">
-                  <li onClick={() => handlerCategoriaOp(1)} className="dropdown-item">Novelas</li>
-                  <li onClick={() => handlerCategoriaOp(2)} className="dropdown-item">Terror</li>
-                  <li className="dropdown-item">Drama</li>
-                  <li className="dropdown-item">Enciclopedias</li>
+                  <li onClick={() => handlerCategoriaOp(1)} className="dropdown-item">Ficcion</li>
+                  <li onClick={() => handlerCategoriaOp(2)} className="dropdown-item">Novela</li>
+                  <li onClick={() => handlerCategoriaOp(3)} className="dropdown-item">Historia</li>
+                  <li onClick={() => handlerCategoriaOp(4)}  className="dropdown-item">Ciencia</li>
                 </ul>
               </div>
 
