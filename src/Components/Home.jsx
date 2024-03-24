@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { NavBar } from './NavBar';
-import { borrarLibro, obtenerLibros, buscarLibros } from '../Services/Funciones.js';
+import { borrarLibro, obtenerLibros } from '../Services/Funciones.js';
 
 export const Home = () => {
 
   const [dataLibros, setDataLibros] = useState([]);
   const [cambioEstado, setCambioEstado] = useState(0);
-  const [filtro, setFiltro] = useState('');
-  const [busquedaRealizada, setBusquedaRealizada] = useState(false);
-  const [libroEncontrado, setLibroEncontrado] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [noResultados, setNoResultados] = useState(false);
   const [nombre, setNombre] = useState('')
   const [autor, setAutor] = useState('')
   const [anio, setAnio] = useState('')
@@ -19,7 +15,9 @@ export const Home = () => {
   const [id, setId] = useState('')
   const [alerta, setAlerta] = useState('')
   const [operacition, setOperation] = useState('')
+  const [categoria, setCategoria] = useState('')
 
+  console.log(categoria)
   useEffect(() => {
     const fetchDatda = async () => {
       try {
@@ -42,11 +40,6 @@ export const Home = () => {
     }
   };
 
-  const handlerBusquedaClick = () => {
-    const libroEncontrado = buscarLibros(filtro, dataLibros, setBusquedaRealizada, setNoResultados)
-    setLibroEncontrado(libroEncontrado.length > 0 ? libroEncontrado[0] : null);
-  };
-
   const handlerBorrarLibro = async (idLibro) => {
     try {
       await borrarLibro(idLibro, setCambioEstado)
@@ -55,20 +48,22 @@ export const Home = () => {
     }
   };
 
-  const openModal = (operacion, id, name, autor, anio, estado) => {
-    setId(id)
-    setNombre(name)
-    setAutor(autor)
-    setAnio(anio)
-    setEstado(estado)
-    setOperation(operacion)
-
+  const openModal = (operacion, id, name, autor, anio, estado, categoria) => {
     if (operacion === 1) {
       setNombre('')
       setAutor('')
       setAnio('')
       setEstado('')
       setAlerta('')
+      setCategoria('')
+      setOperation(operacion)
+    }else{
+      setId(id)
+      setNombre(name)
+      setAutor(autor)
+      setAnio(anio)
+      setEstado(estado)
+      setCategoria(categoria)
       setOperation(operacion)
     }
 
@@ -86,7 +81,8 @@ export const Home = () => {
         titulo: nombre,
         autor: autor,
         anio_publicacion: anio,
-        estado: estado
+        estado: estado,
+        categoria_id : categoria
       }
 
       await axios.put(url, data)
@@ -103,7 +99,8 @@ export const Home = () => {
         titulo: nombre,
         autor: autor,
         anio_publicacion: anio,
-        estado: estado
+        estado: estado,
+        categoria_id: categoria
       }
 
       await axios.post(url, data)
@@ -113,6 +110,7 @@ export const Home = () => {
       setAutor('')
       setAnio('')
       setEstado('')
+      setCategoria('')
     }
   };
 
@@ -132,8 +130,6 @@ export const Home = () => {
         <h1 className='text-center text-white'>Sistema Biblioteca</h1>
         <div className='mt-5'>
           <NavBar
-            onFiltroChange={(event) => handlerFiltroChange(event)}
-            onBusquedaClick={(event) => handlerBusquedaClick(event)}
             openModal={(operacion) => openModal(operacion)}></NavBar>
         </div>
 
@@ -157,21 +153,7 @@ export const Home = () => {
                 </tr>
               </thead>
               <tbody>
-                {
-                  busquedaRealizada && libroEncontrado ? (
-                    <tr key={libroEncontrado.id}>
-                      <td>{libroEncontrado.id}</td>
-                      <td>{libroEncontrado.titulo}</td>
-                      <td>{libroEncontrado.autor}</td>
-                      <td>{libroEncontrado.anio_publicacion}</td>
-                      <td>{libroEncontrado.estado}</td>
-                      <td className='text-center'><button className='btn btn-danger' onClick={() => borrarLibro(libroEncontrado.id)}>X</button></td>
-                    </tr>
-                  ) : noResultados ? (
-                    <tr>
-                      <td colSpan="6">No se encontraron resultados.</td>
-                    </tr>
-                  ) : (
+                {                 
                     dataLibros.map((item) => (
                       <tr key={item.id}>
                         <td>{item.id}</td>
@@ -180,11 +162,11 @@ export const Home = () => {
                         <td>{item.anio_publicacion}</td>
                         <td>{item.estado}</td>
                         <td className='text-center'>
-                          <button className='btn btn-success' data-bs-toggle="modal" data-bs-target="#openModal" onClick={() => openModal(2, item.id, item.titulo, item.autor, item.anio_publicacion, item.estado)}><i className='fa-solid fa-pen-to-square'></i></button>
+                          <button className='btn btn-success' data-bs-toggle="modal" data-bs-target="#openModal" onClick={() => openModal(2, item.id, item.titulo, item.autor, item.anio_publicacion, item.estado, item.categoria_id)}><i className='fa-solid fa-pen-to-square'></i></button>
                           <button className='btn btn-danger' onClick={() => handlerBorrarLibro(item.id)}><i className='fa-solid fa-trash-can'></i></button>
                         </td>
                       </tr>
-                    ))
+                    )               
                   )
                 }
               </tbody>
@@ -218,6 +200,12 @@ export const Home = () => {
                 <div className="input-group-text"><span className='fa-solid fa-toggle-on'></span></div>
                 <input type="text" className="form-control" id="estado" value={estado} onChange={(e) => setEstado(e.target.value)} placeholder="Estado Disponible / Reservado"></input>
               </div>
+              <select className="form-select" value={categoria} onChange={(e)=>setCategoria(e.target.value)} aria-label="Default select example">
+                <option selected>Categoria</option>
+                <option value="1">Ficcion</option>
+                <option value="2">Novelas</option>
+                <option value="3">Terror</option>
+              </select>
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" onClick={() => closeClick()} data-bs-dismiss="modal">Cerrar</button>

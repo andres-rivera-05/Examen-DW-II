@@ -88,3 +88,15 @@ button.btn.btn-success.btn-add {
 .navbar.navbar-expand-lg.bg-dark {
     background-color: #020202 !important;
 }
+
+td.td-img {
+    width: 74px;
+    max-width: 74px;
+    padding-bottom: 5px !important;
+    padding-top: 5px !important;
+    text-align: center;
+}
+
+img.avatar {
+    border-radius: 50%;
+}

@@ -1,60 +1,23 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import { NavBar } from './NavBar'
+import axios from 'axios'
 
 export const Usuarios = () => {
 
-  const TablaUsers = [
+  const [ TablaUsers, setTablaUsers ] = useState([])
 
-    {
-      position: 1,
-      nombre: "Juan Perez",
-      gmail: "juanperes24@gmail.com",
-      reservas: 1
-    },
-    {
-      position: 2,
-      nombre: "Maria Lopez",
-      gmail: "marialopez23@gmail.com",
-      reservas: 3
-    },
-    {
-      position: 3,
-      nombre: "Itali Madrid",
-      gmail: "madriditali34@gmail.com",
-      reservas: 1
-    },
-    {
-      position: 4,
-      nombre: "Fernando Manueles",
-      gmail: "Manuelesdestructor34@gmail.com",
-      reservas: 2
-    },
-    {
-      position: 5,
-      nombre: "Daniel Mejia",
-      gmail: "Danielmegia243@gmail.com",
-      reservas: 1
-    },
-    {
-      position: 6,
-      nombre: "Patricia Castro",
-      gmail: "paticastro54@gmail.com",
-      reservas: 3
-    },
-    {
-      position: 7,
-      nombre: "David Rodriguez",
-      gmail: "rodrigesdavidd12312@gmail.com",
-      reservas: 3
-    },
-    {
-      position: 8,
-      nombre: "Carlos Euceda",
-      gmail: "Euces29323@gmail.com",
-      reservas: 1
-    }
-  ]
+  const url ="http://localhost:5000/api/usuario"
 
+  const getUsuarios = async () => {
+    const result = await axios.get(url)
+    setTablaUsers(result.data)
+  }
+
+  useEffect(()=>{
+    getUsuarios();
+  },[])
+
+   
   return (
     <>
       <div className='container col-12 mt-5'>
@@ -67,6 +30,7 @@ export const Usuarios = () => {
           <thead>
             <tr>
               <th scope="col">ID</th>
+              <th scope="col">Avatar</th>
               <th scope="col">Nombre</th>
               <th scope="col">Gmail</th>
               <th scope="col">Reservas</th>
@@ -75,11 +39,14 @@ export const Usuarios = () => {
           <tbody>
             {TablaUsers.map((item) => (
 
-              <tr key={item.position}>
-                <td>{item.position}</td>
+              <tr key={item.id}>
+                <td>{item.id}</td>
+                <td className='td-img'>
+                  <img className='avatar' src={`data:${item.mime_type};base64,${item.imagen}`} width={50} alt="avatar"/>
+                </td>
                 <td>{item.nombre}</td>
                 <td>{item.gmail}</td>
-                <td>{item.reservas}</td>
+                <td>{item.total_reservas}</td>
               </tr>
 
             ))}

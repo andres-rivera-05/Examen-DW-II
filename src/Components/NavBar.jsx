@@ -1,19 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export const NavBar = ({ onBusquedaClick, onFiltroChange, openModal }) => {
-
-  const handlerFiltroChange = (event) => {
-    onFiltroChange(event.target.value);
-  };
-
-  const handlerBusquedaClick = (event) => {
-    event.preventDefault();
-    onBusquedaClick();
-  };
+export const NavBar = ({ openModal, categoriaOp }) => {
 
   const handlerOpenModal = (op) => {
     openModal(op);
+  }
+
+  const handlerCategoriaOp = (categoriaOpcion) => {
+    categoriaOp(categoriaOpcion)
   }
 
 
@@ -39,24 +34,20 @@ export const NavBar = ({ onBusquedaClick, onFiltroChange, openModal }) => {
                   <span className="visually-hidden">Toggle Dropdown</span>
                 </li>
                 <ul className="dropdown-menu">
-                  <li><Link to={'/novelas'} className="dropdown-item" href="#">Novelas</Link></li>
-                  <li><Link to={'/terror'} className="dropdown-item" href="#">Terror</Link></li>
-                  <li><Link to={'/drama'} className="dropdown-item" href="#">Drama</Link></li>
-                  <li><Link to={'/enciclopedias'} className="dropdown-item" href="#">Enciclopedias</Link></li>
+                  <li onClick={() => handlerCategoriaOp(1)} className="dropdown-item">Novelas</li>
+                  <li onClick={() => handlerCategoriaOp(2)} className="dropdown-item">Terror</li>
+                  <li className="dropdown-item">Drama</li>
+                  <li className="dropdown-item">Enciclopedias</li>
                 </ul>
               </div>
 
               <li className="nav-item">
-                <Link to={'/reservas'} className="nav-link active" href="#">Reservas</Link>
+                <Link to={'/reservas'} className="nav-link active" href="#">Reservas <button className='btn btn-success btn-add' data-bs-toggle="modal" data-bs-target="#openModal" onClick={() => handlerOpenModal(1)}><i className='fa-solid fa-circle-plus'></i></button></Link>
               </li>
               <li className="nav-item">
                 <Link to={'/usuarios'} className="nav-link active" href="#" aria-disabled="true">Usuarios</Link>
               </li>
-            </ul>
-            <form className="d-flex" role="search">
-              <input className="form-control me-2" type="text" onChange={handlerFiltroChange} placeholder="Buscar: id, titulo, autor, estado" aria-label="Search"></input>
-              <button className="btn btn-outline-success" onClick={handlerBusquedaClick} >Search</button>
-            </form>
+            </ul>       
           </div>
         </div>
       </nav>

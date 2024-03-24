@@ -6,6 +6,9 @@ import { Home } from './Components/Home'
 import { NavBar } from './Components/NavBar'
 import { Usuarios } from './Components/Usuarios'
 import { Registro } from './Components/Registro';
+import { Login } from './Components/Login';
+import { Reservas } from './Components/Reservas';
+import { Categorias } from './Components/Categorias';
 
 function App() {
 
@@ -17,6 +20,9 @@ function App() {
       <Route path='/navbar' element={<NavBar />} />
       <Route path='/usuarios' element={<Usuarios />} />
       <Route path='/registro' element={<Registro />} />
+      <Route path='/login' element={<Login />} />
+      <Route path='/categorias' element={<Categorias />} />
+      <Route path='/reservas' element={<Reservas />} />
     </Routes>
     </BrowserRouter>
     </>
